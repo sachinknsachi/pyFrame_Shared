@@ -32,28 +32,29 @@ class SearchPage:
         self.actions.waitForElementToDisappear(self.LOADER)
         self.actions.waitForElementToDisappear(self.LOADER_BUBBLE)
 
-    def selectSailings(self, month, from_date, to_date):
+    def selectSailings(self, packageObject):
         self.actions.waitForElementToDisappear(self.LOADER_SPIRAL)
         self.actions.waitForElementToDisappear(self.LOADER)
         self.actions.waitForElementToDisappear(self.LOADER_BUBBLE)
 
         self.actions.click(self.SAILINGS_DATES_LOCATOR)
         self.actions.click(self.SAILINGS_DATES_CALENDER_HEADER_YEAR)
-        self.actions.click([By.XPATH, self.SAILINGS_DATES_CALENDER_YEAR.format(2023)])
-        self.actions.click([By.XPATH, self.SAILINGS_DATES_CALENDER_MONTH.format(month)])
-        self.actions.click([By.XPATH, self.SAILINGS_DATES_CALENDER_DAY.format(from_date)])
-        self.actions.click([By.XPATH, self.SAILINGS_DATES_CALENDER_DAY.format(to_date)])
+        sailings = packageObject.getSailingsDate()
+        self.actions.click([By.XPATH, self.SAILINGS_DATES_CALENDER_YEAR.format(sailings.year)])
+        self.actions.click([By.XPATH, self.SAILINGS_DATES_CALENDER_MONTH.format(sailings.strftime('%B'))])
+        self.actions.click([By.XPATH, self.SAILINGS_DATES_CALENDER_DAY.format(sailings.day)])
+        self.actions.click([By.XPATH, self.SAILINGS_DATES_CALENDER_DAY.format(sailings.day + 10)])
 
         self.actions.waitForElementToDisappear(self.LOADER_SPIRAL)
         self.actions.waitForElementToDisappear(self.LOADER)
         self.actions.waitForElementToDisappear(self.LOADER_BUBBLE)
 
-    def selectCruiseLine(self, cruiseLine):
+    def selectCruiseLine(self, packageObject):
         self.actions.waitForElementToDisappear(self.LOADER_SPIRAL)
         self.actions.waitForElementToDisappear(self.LOADER)
         self.actions.waitForElementToDisappear(self.LOADER_BUBBLE)
 
-        self.actions.type(self.CRUISE_LINE_SELECTOR, cruiseLine)
+        self.actions.type(self.CRUISE_LINE_SELECTOR, packageObject.getCruiseLine())
         self.actions.type(self.CRUISE_LINE_SELECTOR, Keys.ENTER)
 
         self.actions.waitForElementToDisappear(self.LOADER_SPIRAL)
@@ -71,11 +72,11 @@ class SearchPage:
         self.actions.waitForElementToDisappear(self.LOADER)
         self.actions.waitForElementToDisappear(self.LOADER_BUBBLE)
 
-    def fillSearchData(self, month, from_date, to_date, cruiseLine):
+    def fillSearchData(self, packageObject):
         self.waitForPageToLoad()
-        self.selectSailings(month, from_date, to_date)
+        self.selectSailings(packageObject)
         self.actions.waitForElementToDisappear(self.LOADER_SPIRAL)
         self.actions.waitForElementToDisappear(self.LOADER)
         self.actions.waitForElementToDisappear(self.LOADER_BUBBLE)
-        self.selectCruiseLine(cruiseLine)
+        self.selectCruiseLine(packageObject)
 

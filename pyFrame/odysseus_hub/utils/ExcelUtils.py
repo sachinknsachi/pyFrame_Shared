@@ -1,15 +1,15 @@
+import os
+
 from openpyxl import load_workbook
 
 
 class ExcelUtils:
 
     @staticmethod
-    def getCellData(cell, sheet=None, path=None):
+    def getCellData(cell, sheet="Sheet1", path=None):
 
         if path is None:
-            path = "C:/Users/sachi/OneDrive/Desktop/openPyXl.xlsx"
-        if sheet is None:
-            sheet = "Sheet1"
+            path = os.path.abspath("./").split("odysseus_tests")[0] + "odysseus_tests\\tests\\resources\\excels\\defaultExcelData.xlsx"
 
         wb = load_workbook(path)
         if sheet is not None and sheet != "" and sheet in wb.sheetnames:
@@ -22,12 +22,10 @@ class ExcelUtils:
             return "Sheet not found"
 
     @staticmethod
-    def getRowColData(col, row, sheet=None, path=None):
+    def getRowColData(col, row, sheet="Sheet1", path=None):
 
         if path is None:
-            path = "C:/Users/sachi/OneDrive/Desktop/openPyXl.xlsx"
-        if sheet is None:
-            sheet = "Sheet1"
+            path = os.path.abspath("./").split("odysseus_tests")[0] + "odysseus_tests\\tests\\resources\\excels\\defaultExcelData.xlsx"
 
         wb = load_workbook(path)
         if sheet is not None and sheet in wb.sheetnames:
@@ -40,12 +38,10 @@ class ExcelUtils:
             return "Sheet not found"
 
     @staticmethod
-    def getColData(col, sheet=None, path=None):
+    def getColData(col, sheet="Sheet1", path=None):
 
         if path is None:
-            path = "C:/Users/sachi/OneDrive/Desktop/openPyXl.xlsx"
-        if sheet is None:
-            sheet = "Sheet1"
+            path = os.path.abspath("./").split("odysseus_tests")[0] + "odysseus_tests\\tests\\resources\\excels\\defaultExcelData.xlsx"
 
         wb = load_workbook(path)
         if sheet is not None and sheet in wb.sheetnames:
@@ -68,10 +64,6 @@ class ExcelUtils:
     def setData(path, sheet, cell):
         pass
 
-
-print(ExcelUtils.getCellData("A1", "Sheet1", "C:/Users/sachi/OneDrive/Desktop/openPyXl.xlsx"))
-print(ExcelUtils.getRowColData("A", "2", "Sheet1", "C:/Users/sachi/OneDrive/Desktop/openPyXl.xlsx"))
-print(ExcelUtils.getColData("Name"))
 
 
 
