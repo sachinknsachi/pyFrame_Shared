@@ -6,13 +6,16 @@ class PackageObject:
     categoryPagePrice = None
 
     def __init__(self, excelPath):
+
         self.instance = ExcelUtils.getRowColData("G", "8", "ScenarioSheet", excelPath)
         self.product = ExcelUtils.getRowColData("G", "9", "ScenarioSheet", excelPath)
         self.sailingsDate = ExcelUtils.getRowColData("G", "10", "ScenarioSheet", excelPath)
         self.parentSiid = ExcelUtils.getRowColData("G", "11", "ScenarioSheet", excelPath)
         self.childSiid = ExcelUtils.getRowColData("G", "12", "ScenarioSheet", excelPath)
-        self.scenario = ExcelUtils.getRowColData("G", "13", "ScenarioSheet", excelPath)
-        self.cruiseLine = ExcelUtils.getRowColData("G", "13", "ScenarioSheet", excelPath)
+        self.browser = ExcelUtils.getRowColData("G", "13", "ScenarioSheet", excelPath)
+        self.cruiseLine = ExcelUtils.getRowColData("G", "14", "ScenarioSheet", excelPath)
+        self.scenario = ExcelUtils.getRowColData("G", "15", "ScenarioSheet", excelPath)
+
         self.finalResult = None
         self.ACN = None
         self.PNR = None
@@ -34,6 +37,12 @@ class PackageObject:
 
     def getProduct(self):
         return self.product
+
+    def setBrowser(self, browser):
+        self.browser = browser
+
+    def getBrowser(self):
+        return self.browser
 
     def setSailingsDate(self, sailingsDate):
         self.sailingsDate = sailingsDate
